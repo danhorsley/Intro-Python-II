@@ -68,18 +68,36 @@ print("creating new player")
 p1 = Player("player 1",room['outside'])
 print(p1)
 print(p1.player_room)
-my_input = 'place_holder'
-while my_input != 'q':
+my_input = []
+my_input.append('place holder')
+while my_input[0] != 'q':
     try:
         my_input = input('please input your command oh master :   ')
-        if my_input in ['n','N',"North","north"]:
+        my_input = my_input.split(' ')
+        if my_input[0] in ['n','N',"North","north"]:
             p1.player_room = p1.player_room.n_to
-        if my_input in ['s','S',"South","south"]:
+        if my_input[0] in ['s','S',"South","south"]:
             p1.player_room = p1.player_room.s_to
-        if my_input in ['e','E',"East","east"]:
+        if my_input[0] in ['e','E',"East","east"]:
             p1.player_room = p1.player_room.e_to
-        if my_input in ['w','W',"West","west"]:
+        if my_input[0] in ['w','W',"West","west"]:
             p1.player_room = p1.player_room.w_to
+        if my_input[0] in ['pick up','get',"take","acquire"]:
+            p1.player_items.append(items[my_input[1]])
+            p1.player_room.room_items.remove(items[my_input[1]])
+            items[my_input[1]].on_take()
+        if my_input[0] in ['drop','ditch',"lose","punt"]:
+            p1.player_items.remove(items[my_input[1]])
+            p1.player_room.room_items.append(items[my_input[1]])
+            items[my_input[1]].on_drop()
+        if my_input[0] in ['i','inv',"inventory","stuff"]:
+            print('in your inventory you hold a ')
+            for i in p1.player_items:
+                print(i.item_name)
+        if my_input[0] in ['look','search',"observe"]:
+            print('in the room you see a ')
+            for j in p1.player_room.room_items:
+                print(j.item_name)
         print(p1)
         print(p1.player_room)
     except:

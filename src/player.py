@@ -8,4 +8,4 @@ class Player:
         self.player_items = []
 
     def __repr__(self):
-        return (f'name:{self.player_name}, room:{self.player_room.room_name}')
+        return (f'name:{self.player_name}, room:{self.player_room.room_name}, items:{self.player_items}')

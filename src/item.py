@@ -7,6 +7,13 @@ class Item:
     def __repr__(self):
         return (f'item : {self.item_name}, description : {self.item_desc}')
 
+    def on_take(self):
+        print(f"You have picked up {self.item_name}")
+    
+    def on_drop(self):
+        print(f"You have dropped {self.item_name}")
+
+
 items = {
     'coins':  Item("coins",
                      "glittering gold coins"),

@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 # minor change
@@ -49,3 +50,24 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+print("creating new player")
+p1 = Player("player 1",room['outside'])
+print(p1)
+print(p1.player_room)
+my_input = 'place_holder'
+while my_input != 'q':
+    try:
+        my_input = input('please input your command oh master :   ')
+        if my_input in ['n','N',"North","north"]:
+            p1.player_room = p1.player_room.n_to
+        if my_input in ['s','S',"South","south"]:
+            p1.player_room = p1.player_room.s_to
+        if my_input in ['e','E',"East","east"]:
+            p1.player_room = p1.player_room.e_to
+        if my_input in ['w','W',"West","west"]:
+            p1.player_room = p1.player_room.w_to
+        print(p1)
+        print(p1.player_room)
+    except:
+        print("you can't go that way!!!")

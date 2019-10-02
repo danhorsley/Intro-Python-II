@@ -18,5 +18,7 @@ items = {
     'magic_hat':   Item("magic_hat", """a hat you can wear with 
     unkown consequences.  magical"""),
 
-    'sneakers': Item("sneakers", """quiet shows for sneaking.  sneaky""")
+    'sneakers': Item("sneakers", """quiet shows for sneaking.  sneaky"""),
+
+    'belt': Item("belt", """rope for holding up trousers""")
 }

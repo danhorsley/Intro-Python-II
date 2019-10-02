@@ -1,5 +1,7 @@
 from room import Room
 from player import Player
+from item import *
+import random
 
 # Declare all the rooms
 # minor change
@@ -21,6 +23,17 @@ to north. The smell of gold permeates the air."""),
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
+
+#randomly assign items to room
+for key in room:
+    items_in_room = random.choice(list(range(1,4)))
+    for i in range(items_in_room):
+        if i == 0 :
+            pass
+        else:
+            item_select = random.choice(list(items.keys()))
+            room[key].room_items.append(items[item_select])
+
 
 
 # Link rooms together

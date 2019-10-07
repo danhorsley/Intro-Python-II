@@ -1,7 +1,10 @@
 from room import Room
+from player import Player
+from item import *
+import random
 
 # Declare all the rooms
-
+# minor change
 room = {
     'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons"),
@@ -20,6 +23,17 @@ to north. The smell of gold permeates the air."""),
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
+
+#randomly assign items to room
+for key in room:
+    items_in_room = random.choice(list(range(1,4)))
+    for i in range(items_in_room):
+        if i == 0 :
+            pass
+        else:
+            item_select = random.choice(list(items.keys()))
+            room[key].room_items.append(items[item_select])
+
 
 
 # Link rooms together
@@ -49,3 +63,42 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+print("creating new player")
+p1 = Player("player 1",room['outside'])
+print(p1)
+print(p1.player_room)
+my_input = []
+my_input.append('place holder')
+while my_input[0] != 'q':
+    try:
+        my_input = input('please input your command oh master :   ')
+        my_input = my_input.split(' ')
+        if my_input[0] in ['n','N',"North","north"]:
+            p1.player_room = p1.player_room.n_to
+        if my_input[0] in ['s','S',"South","south"]:
+            p1.player_room = p1.player_room.s_to
+        if my_input[0] in ['e','E',"East","east"]:
+            p1.player_room = p1.player_room.e_to
+        if my_input[0] in ['w','W',"West","west"]:
+            p1.player_room = p1.player_room.w_to
+        if my_input[0] in ['pick up','get',"take","acquire"]:
+            p1.player_items.append(items[my_input[1]])
+            p1.player_room.room_items.remove(items[my_input[1]])
+            items[my_input[1]].on_take()
+        if my_input[0] in ['drop','ditch',"lose","punt"]:
+            p1.player_items.remove(items[my_input[1]])
+            p1.player_room.room_items.append(items[my_input[1]])
+            items[my_input[1]].on_drop()
+        if my_input[0] in ['i','inv',"inventory","stuff"]:
+            print('in your inventory you hold a ')
+            for i in p1.player_items:
+                print(i.item_name)
+        if my_input[0] in ['look','search',"observe"]:
+            print('in the room you see a ')
+            for j in p1.player_room.room_items:
+                print(j.item_name)
+        print(p1)
+        print(p1.player_room)
+    except:
+        print("you can't go that way!!!")
